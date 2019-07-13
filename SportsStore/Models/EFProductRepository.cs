@@ -4,24 +4,24 @@ namespace SportsStore.Models
 {
     public class EFProductRepository : IProductRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext context;
 
         public EFProductRepository(ApplicationDbContext ctx)
         {
-            _context = ctx;
+            context = ctx;
         }
 
-        public IQueryable<Product> Products => _context.Products;
+        public IQueryable<Product> Products => context.Products;
 
         public void SaveProduct(Product product)
         {
             if (product.ProductId == 0)
             {
-                _context.Products.Add(product);
+                context.Products.Add(product);
             }
             else
             {
-                var dbEntry = _context.Products.FirstOrDefault(p => p.ProductId == product.ProductId);
+                var dbEntry = context.Products.FirstOrDefault(p => p.ProductId == product.ProductId);
                 if(dbEntry != null)
                 {
                     dbEntry.Name = product.Name;
@@ -30,16 +30,16 @@ namespace SportsStore.Models
                     dbEntry.Category = product.Category;
                 }
             }
-            _context.SaveChanges();
+            context.SaveChanges();
         }
 
         public Product DeleteProduct(int productId)
         {
-            var dbEntry = _context.Products.FirstOrDefault(p => p.ProductId == productId);
+            var dbEntry = context.Products.FirstOrDefault(p => p.ProductId == productId);
             if(dbEntry != null)
             {
-                _context.Products.Remove(dbEntry);
-                _context.SaveChanges();
+                context.Products.Remove(dbEntry);
+                context.SaveChanges();
             }
             return dbEntry;
         }

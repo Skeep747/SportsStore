@@ -7,12 +7,12 @@ namespace SportsStore.Controllers
 {
     public class CartController : Controller
     {
-        private readonly IProductRepository _repository;
+        private readonly IProductRepository repository;
         private readonly Cart _cart;
 
         public CartController(IProductRepository repo, Cart cartService)
         {
-            _repository = repo;
+            repository = repo;
             _cart = cartService;
         }
 
@@ -27,7 +27,7 @@ namespace SportsStore.Controllers
 
         public RedirectToActionResult AddToCart(int productId, string returnUrl)
         {
-            var product = _repository.Products.FirstOrDefault(p => p.ProductId == productId);
+            var product = repository.Products.FirstOrDefault(p => p.ProductId == productId);
 
             if(product != null)
             {
@@ -39,7 +39,7 @@ namespace SportsStore.Controllers
 
         public RedirectToActionResult RemoveFromCart(int productId, string returnUrl)
         {
-            var product = _repository.Products.FirstOrDefault(p => p.ProductId == productId);
+            var product = repository.Products.FirstOrDefault(p => p.ProductId == productId);
 
             if(product != null)
             {

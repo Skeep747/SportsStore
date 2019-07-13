@@ -22,12 +22,21 @@
                 <td>Product</td>
                 <td>Quantity</td>
                 <td>
-                    <form asp-action="MarkShipped" method="post">
+                    <form asp-action="MarkedShipped" method="post">
                         <input type="hidden" name="orderId" value="@o.OrderId" />
                         <button type="submit" class="btn btn-sm btn-danger">Ship</button>
                     </form>
                 </td>
             </tr>
+            @foreach(var line in o.Lines)
+            {
+                <tr>
+                    <td colspan="2"></td>
+                    <td>@line.Product.Name</td>
+                    <td>@line.Quantity</td>
+                    <td></td>
+                </tr>
+            }
         }
     </table>
 }

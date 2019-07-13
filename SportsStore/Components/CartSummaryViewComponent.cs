@@ -5,16 +5,16 @@ namespace SportsStore.Components
 {
     public class CartSummaryViewComponent : ViewComponent
     {
-        private readonly Cart _cart;
+        private readonly Cart cart;
 
         public CartSummaryViewComponent(Cart cartService)
         {
-            _cart = cartService;
+            cart = cartService;
         }
 
         public IViewComponentResult Invoke()
         {
-            return View(_cart);
+            return View(cart);
         }
     }
 }
